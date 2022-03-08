@@ -14,7 +14,7 @@ namespace AddressBookLinQ
             bool flag = true;
             DataTableManager dataTableManager = new DataTableManager();
             Console.WriteLine("Choose an option: ");
-            Console.WriteLine("1.Create Data Table\t2.Add values in table\t3.exit");
+            Console.WriteLine("1.Create Data Table\t2.Add values in table\t3.Display Values\t4.Edit Contact\t5.exit");
             int option=Convert.ToInt32(Console.ReadLine());
             switch(option)
             {
@@ -27,6 +27,12 @@ namespace AddressBookLinQ
                     Console.WriteLine("Values Added Succesfully!!!!");
                     break;
                 case 3:
+                    dataTableManager.Display();
+                    break;
+                case 4:
+                    dataTableManager.EditDataTable("Swapnil","FirstName","Shweta");
+                        break;
+                case 5:
                     flag = false;
                     break;
             }

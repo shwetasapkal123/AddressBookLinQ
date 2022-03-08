@@ -164,5 +164,25 @@ namespace AddressBookLinQ
             dtRow["Email"] = contactDataManager.Email;
             dataTable.Rows.Add(dtRow);
         }
+        //Display all Values in DataRow
+        public void Display()
+        {
+            foreach (DataRow dtRows in dataTable.Rows)
+            {
+                Console.WriteLine("{0} \n {1} \n {2} \n {3} \n {4} \n {5} \n {6} \n {7}\n\n", dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["Zip"], dtRows["PhoneNumber"], dtRows["Email"]);
+            }
+        }
+        public int EditDataTable(string FirstName, string ColumnName,string ColumnValue)
+        {
+            AddValues();
+            var modifiedList = (from ContactList in dataTable.AsEnumerable() where ContactList.Field<string>("FirstName") == FirstName select ContactList).FirstOrDefault();
+            if (modifiedList != null)
+            {
+                modifiedList[ColumnName] = ColumnValue;
+                Display();
+                return 1;
+            }
+            else return 0;
+        }
     }
 }
