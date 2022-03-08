@@ -109,10 +109,60 @@ namespace AddressBookLinQ
             dataColumn.Unique = false;
             // Add column to the DataColumnCollection.    
             dataTable.Columns.Add(dataColumn);
-
-            Console.WriteLine("Created Table Successfully!!!");
         }
         //Insert Values in Datatable        
+        public int AddValues()
+        {
+            CreateDataTable();
+            //Create Object for DataTable
+            DataManager contactDataManager = new DataManager();
+            //DataManager contactDataManagers = new DataManager();
+            //Insert Values into Table
+            contactDataManager.FirstName = "Snehal";
+            contactDataManager.LastName = "Jagtap";
+            contactDataManager.PhoneNumber = 9842905050;
+            contactDataManager.Email = "snehal@gmail.com";
+            contactDataManager.Address = "Chinchwad";
+            contactDataManager.City = "Pune";
+            contactDataManager.State = "Maharashtra";
+            contactDataManager.zip = 600072;
+            InsertintoDataTable(contactDataManager);
 
+            //Insert Values into Table
+            contactDataManager.FirstName = "Swagata";
+            contactDataManager.LastName = "Sawant";
+            contactDataManager.PhoneNumber = 7742905050;
+            contactDataManager.Email = "swagata@gmail.com";
+            contactDataManager.Address = "Marathahalli";
+            contactDataManager.City = "Benglore";
+            contactDataManager.State = "Karnataka";
+            contactDataManager.zip = 123001;
+            InsertintoDataTable(contactDataManager);
+
+            contactDataManager.FirstName = "Swapnil";
+            contactDataManager.LastName = "Sapkal";
+            contactDataManager.PhoneNumber = 7742905050;
+            contactDataManager.Email = "swapnil@gmail.com";
+            contactDataManager.Address = "pimpri";
+            contactDataManager.City = "pune";
+            contactDataManager.State = "Maharashtra";
+            contactDataManager.zip = 123001;
+            InsertintoDataTable(contactDataManager);
+            return dataTable.Rows.Count;
+        }
+        //Insert values in Data Table
+        public void InsertintoDataTable(DataManager contactDataManager)
+        {
+            DataRow dtRow = dataTable.NewRow();
+            dtRow["FirstName"] = contactDataManager.FirstName;
+            dtRow["LastName"] = contactDataManager.LastName;
+            dtRow["Address"] = contactDataManager.Address;
+            dtRow["City"] = contactDataManager.City;
+            dtRow["State"] = contactDataManager.State;
+            dtRow["Zip"] = contactDataManager.zip;
+            dtRow["PhoneNumber"] = contactDataManager.PhoneNumber;
+            dtRow["Email"] = contactDataManager.Email;
+            dataTable.Rows.Add(dtRow);
+        }
     }
 }
