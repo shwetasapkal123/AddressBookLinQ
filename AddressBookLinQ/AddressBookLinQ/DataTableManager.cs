@@ -199,5 +199,18 @@ namespace AddressBookLinQ
             }
             else return 0;
         }
+        //UC6-Retrieve values from DataTable based on City or State
+        public string RetrieveBasedOnCityorState(string City, string State)
+        {
+            AddValues();
+            string nameList = "";
+            var modifiedList = (from ContactList in dataTable.AsEnumerable() where (ContactList.Field<string>("State") == State || ContactList.Field<string>("City") == City) select ContactList);
+            foreach (var dtRows in modifiedList)
+            {
+                nameList += dtRows["FirstName"] + " ";
+                Console.WriteLine("{0} \t {1} \t {2} \t {3} \t {4} \t {5} \t {6} \t {7} \t {8}\n", dtRows["ID"], dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["Zip"], dtRows["PhoneNumber"], dtRows["Email"]);
+            }
+            return nameList;
+        }
     }
 }

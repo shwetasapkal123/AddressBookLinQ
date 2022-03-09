@@ -44,6 +44,15 @@ namespace AddressBookLinQTest
             int actual = dataTableMangerT.DeleteRowInDataTable("Swagata");
             Assert.AreEqual(actual, expected);
         }
+        //Usecase 6 
+        [TestMethod]
+        [TestCategory("Retrieve Row in Data Table based on City or state")]
+        public void GivenRetrieveQuery_BasedOnCityandState_returnString()
+        {
+            string expected = "Swagata ";
+            string actual = dataTableMangerT.RetrieveBasedOnCityorState("Benglore", "Karnataka");
+            Assert.AreEqual(actual, expected);
+        }
     }
 
 }

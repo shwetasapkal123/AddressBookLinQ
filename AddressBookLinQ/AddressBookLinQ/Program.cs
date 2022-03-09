@@ -14,7 +14,7 @@ namespace AddressBookLinQ
             bool flag = true;
             DataTableManager dataTableManager = new DataTableManager();
             Console.WriteLine("Choose an option: ");
-            Console.WriteLine("1.Create Data Table\t2.Add values in table\t3.Display Values\t4.Edit Contact\t5.Delete person details\t6.exit");
+            Console.WriteLine("1.Create Data Table\t2.Add values in table\t3.Display Values\t4.Edit Contact\t5.Delete person details\t6.Retrieve data using city or state\t7.exit");
             int option=Convert.ToInt32(Console.ReadLine());
             switch(option)
             {
@@ -36,6 +36,9 @@ namespace AddressBookLinQ
                     dataTableManager.DeleteRowInDataTable("Swagata");
                     break;
                 case 6:
+                    dataTableManager.RetrieveBasedOnCityorState("Pune", "Maharashtra");
+                    break;
+                case 7:
                     flag = false;
                     break;
             }
