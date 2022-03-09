@@ -27,6 +27,7 @@ namespace AddressBookLinQ
                     Console.WriteLine("Values Added Succesfully!!!!");
                     break;
                 case 3:
+                    dataTableManager.AddValues();
                     dataTableManager.Display();
                     break;
                 case 4:

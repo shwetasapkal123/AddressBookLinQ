@@ -124,7 +124,6 @@ namespace AddressBookLinQ
             CreateDataTable();
             //Create Object for DataTable
             DataManager contactDataManager = new DataManager();
-            //DataManager contactDataManagers = new DataManager();
             //Insert Values into Table
             contactDataManager.FirstName = "Snehal";
             contactDataManager.LastName = "Jagtap";
@@ -159,6 +158,18 @@ namespace AddressBookLinQ
             contactDataManager.zip = 123001;
             contactDataManager.ContactType = "Family";
             InsertintoDataTable(contactDataManager);
+            
+            // UC11-Adding person to both ContactType
+            contactDataManager.FirstName = "Swapnil";
+            contactDataManager.LastName = "Sapkal";
+            contactDataManager.PhoneNumber = 7742905050;
+            contactDataManager.Email = "swapnil@gmail.com";
+            contactDataManager.Address = "pimpri";
+            contactDataManager.City = "Pune";
+            contactDataManager.State = "Maharashtra";
+            contactDataManager.zip = 123001;
+            contactDataManager.ContactType = "Friends";
+            InsertintoDataTable(contactDataManager);
             return dataTable.Rows.Count;
         }
         //Insert values in Data Table
@@ -181,7 +192,7 @@ namespace AddressBookLinQ
         {
             foreach (DataRow dtRows in dataTable.Rows)
             {
-                Console.WriteLine("{0} \n {1} \n {2} \n {3} \n {4} \n {5} \n {6} \n {7}\n\n", dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["Zip"], dtRows["PhoneNumber"], dtRows["Email"]);
+                Console.WriteLine("{0} \n {1} \n {2} \n {3} \n {4} \n {5} \n {6} \n {7}\n {8}\n", dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["Zip"], dtRows["PhoneNumber"], dtRows["Email"],dtRows["ContactType"]);
             }
         }
         public int EditDataTable(string FirstName, string ColumnName,string ColumnValue)
