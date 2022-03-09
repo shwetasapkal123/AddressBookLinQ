@@ -184,5 +184,20 @@ namespace AddressBookLinQ
             }
             else return 0;
         }
+
+        //UC-5-Delete a person from DataTable based on Name
+        public int DeleteRowInDataTable(string FirstName)
+        {
+            AddValues();
+            var modifiedList = (from ContactList in dataTable.AsEnumerable() where ContactList.Field<string>("FirstName") == FirstName select ContactList).FirstOrDefault();
+            if (modifiedList != null)
+            {
+                modifiedList.Delete();
+                Console.WriteLine("--- After Deletion ---");
+                Display();
+                return 1;
+            }
+            else return 0;
+        }
     }
 }
