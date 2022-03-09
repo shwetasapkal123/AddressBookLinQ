@@ -109,6 +109,14 @@ namespace AddressBookLinQ
             dataColumn.Unique = false;
             // Add column to the DataColumnCollection.    
             dataTable.Columns.Add(dataColumn);
+
+            //create contact type
+            dataColumn = new DataColumn();
+            dataColumn.DataType = typeof(string);
+            dataColumn.ColumnName = "ContactType";
+            dataColumn.Caption = "ContactType";
+            //Adding column to the DataColumnCollection.  
+            dataTable.Columns.Add(dataColumn);
         }
         //Insert Values in Datatable        
         public int AddValues()
@@ -126,6 +134,7 @@ namespace AddressBookLinQ
             contactDataManager.City = "Pune";
             contactDataManager.State = "Maharashtra";
             contactDataManager.zip = 600072;
+            contactDataManager.ContactType = "Family";
             InsertintoDataTable(contactDataManager);
 
             //Insert Values into Table
@@ -137,6 +146,7 @@ namespace AddressBookLinQ
             contactDataManager.City = "Benglore";
             contactDataManager.State = "Karnataka";
             contactDataManager.zip = 123001;
+            contactDataManager.ContactType = "Friend";
             InsertintoDataTable(contactDataManager);
 
             contactDataManager.FirstName = "Swapnil";
@@ -144,9 +154,10 @@ namespace AddressBookLinQ
             contactDataManager.PhoneNumber = 7742905050;
             contactDataManager.Email = "swapnil@gmail.com";
             contactDataManager.Address = "pimpri";
-            contactDataManager.City = "pune";
+            contactDataManager.City = "Pune";
             contactDataManager.State = "Maharashtra";
             contactDataManager.zip = 123001;
+            contactDataManager.ContactType = "Family";
             InsertintoDataTable(contactDataManager);
             return dataTable.Rows.Count;
         }
@@ -162,6 +173,7 @@ namespace AddressBookLinQ
             dtRow["Zip"] = contactDataManager.zip;
             dtRow["PhoneNumber"] = contactDataManager.PhoneNumber;
             dtRow["Email"] = contactDataManager.Email;
+            dtRow["ContactType"] = contactDataManager.ContactType;
             dataTable.Rows.Add(dtRow);
         }
         //Display all Values in DataRow
@@ -211,6 +223,56 @@ namespace AddressBookLinQ
                 Console.WriteLine("{0} \t {1} \t {2} \t {3} \t {4} \t {5} \t {6} \t {7} \t {8}\n", dtRows["ID"], dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["Zip"], dtRows["PhoneNumber"], dtRows["Email"]);
             }
             return nameList;
+        }
+        //UC7-Retrieve Count values from DataTable based on City or State
+        public string RetrieveCountBasedOnCityorState()
+        {
+            AddValues();
+            string result = "";
+            var modifiedList = (from ContactList in dataTable.AsEnumerable().GroupBy(r => new { Col1 = r["City"], Col2 = r["State"] }) select ContactList);
+            Console.WriteLine("Äfter count");
+            foreach (var j in modifiedList)
+            {
+                result += j.Count() + " ";
+                Console.WriteLine("Count Key" + j.Key);
+                foreach (var dtRows in j)
+                {
+                    Console.WriteLine("{0} \t {1} \t {2} \t {3} \t {4} \t {5} \t {6} \t {7} \t {8}\n", dtRows["ID"], dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["Zip"], dtRows["PhoneNumber"], dtRows["Email"]);
+                }
+            }
+            return result;
+        }
+        //Sort based on City
+        public string SortBasedOnCity(string City)
+        {
+            AddValues();
+            string result = "";
+            var modifiedList = (from ContactList in dataTable.AsEnumerable() orderby ContactList.Field<string>("FirstName") where ContactList.Field<string>("City") == City select ContactList);
+            Console.WriteLine("After sorting");
+            foreach (var dtRows in modifiedList)
+            {
+                result += dtRows["FirstName"] + " ";
+                Console.WriteLine("{0} \t {1} \t {2} \t {3} \t {4} \t {5} \t {6} \t {7} \t {8}\n", dtRows["ID"], dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["Zip"], dtRows["PhoneNumber"], dtRows["Email"]);
+
+            }
+            return result;
+        }
+        public string RetrieveCountBasedOnType()
+        {
+            AddValues();
+            string result = "";
+            var modifiedList = (from ContactList in dataTable.AsEnumerable().GroupBy(r => new { Col1 = r["ContactType"] }) select ContactList);
+            Console.WriteLine("Äfter count");
+            foreach (var j in modifiedList)
+            {
+                result += j.Count() + " ";
+                Console.WriteLine("Count Key" + j.Key);
+                foreach (var dtRows in j)
+                {
+                    Console.WriteLine("{0} \t {1} \t {2} \t {3} \t {4} \t {5} \t {6} \t {7} \t {8} \t {9}\n", dtRows["ID"], dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["Zip"], dtRows["PhoneNumber"], dtRows["Email"], dtRows["ContactType"]);
+                }
+            }
+            return result;
         }
     }
 }

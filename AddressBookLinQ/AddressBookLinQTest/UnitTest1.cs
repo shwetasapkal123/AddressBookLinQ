@@ -53,6 +53,34 @@ namespace AddressBookLinQTest
             string actual = dataTableMangerT.RetrieveBasedOnCityorState("Benglore", "Karnataka");
             Assert.AreEqual(actual, expected);
         }
+
+        //UC 7 Retrieve count values from DataTable based on City or State
+        [TestMethod]
+        [TestCategory("Retrieve Row in Data Table based on City ")]
+        public void GivenRetrieveCountQuery_BasedOnCityandState_returnString()
+        {
+            string expected = "2 1 ";
+            string actual = dataTableMangerT.RetrieveCountBasedOnCityorState();
+            Assert.AreEqual(actual, expected);
+        }
+        //UC 8 Sort based on City
+        [TestMethod]
+        [TestCategory("Sort based on City")]
+        public void GivenSortQuery_BasedOnCityandState_returnString()
+        {
+            string expected = "Snehal Swapnil ";
+            string actual = dataTableMangerT.SortBasedOnCity("Pune");
+            Assert.AreEqual(actual, expected);
+        }
+        //Usecase 8 sort based on Contact Type
+        [TestMethod]
+        [TestCategory("Sort based on Type")]
+        public void GivenCountQuery_BasedOnCityandState_returnString()
+        {
+            string expected = "2 1 ";
+            string actual = dataTableMangerT.RetrieveCountBasedOnType();
+            Assert.AreEqual(actual, expected);
+        }
     }
 
 }

@@ -14,7 +14,7 @@ namespace AddressBookLinQ
             bool flag = true;
             DataTableManager dataTableManager = new DataTableManager();
             Console.WriteLine("Choose an option: ");
-            Console.WriteLine("1.Create Data Table\t2.Add values in table\t3.Display Values\t4.Edit Contact\t5.Delete person details\t6.Retrieve data using city or state\t7.exit");
+            Console.WriteLine("1.Create Data Table\t2.Add values in table\t3.Display Values\t4.Edit Contact\t5.Delete person details\t6.Retrieve data using city or state\t7.Count based on city or state\t8.Sort based on name\t9.Add Contact Type column\t10.exit");
             int option=Convert.ToInt32(Console.ReadLine());
             switch(option)
             {
@@ -39,6 +39,18 @@ namespace AddressBookLinQ
                     dataTableManager.RetrieveBasedOnCityorState("Pune", "Maharashtra");
                     break;
                 case 7:
+                    string res=dataTableManager.RetrieveCountBasedOnCityorState();
+                    Console.WriteLine(res);
+                    break;
+                case 8:
+                    string r1=dataTableManager.SortBasedOnCity("Pune");
+                    Console.WriteLine(r1);
+                    break;
+                case 9:
+                   string r2= dataTableManager.RetrieveCountBasedOnType();
+                    Console.WriteLine(r2);
+                    break;
+                case 10:
                     flag = false;
                     break;
             }
