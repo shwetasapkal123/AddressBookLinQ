@@ -257,6 +257,7 @@ namespace AddressBookLinQ
             }
             return result;
         }
+        //Uc10-Retrieve count based on contact type
         public string RetrieveCountBasedOnType()
         {
             AddValues();
